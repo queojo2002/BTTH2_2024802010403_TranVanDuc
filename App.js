@@ -1,17 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Contacts from './screens/Contacts';
-import ContactThumbnail from './components/ContactThumbnail';
-import DetailListItem from './components/DetailListItem';
+import Profile from './screens/Profile';
+import MyStack from './navigation/stack_navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import Favorites from './screens/Favorites';
+import MyTabs from './navigation/bottom_navigation';
+import TabNavigator from './navigation/stack_navigation';
 
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ContactThumbnail />
-      <DetailListItem icon="email" title="Email" subtitle="ducln339@gmail.com"/>
-      <StatusBar style="auto" />
-    </View>
+  
+    <NavigationContainer>
+      <TabNavigator />
+    </NavigationContainer>
+    
   );
 }
 

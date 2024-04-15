@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import React, { Component, useEffect, useState } from 'react';
+import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native';
 import { fetchContacts } from '../utility/api';
-import ContactListItem from '../components/ContactListItem';
+import ContactThumbnail from '../components/ContactThumbnail';
 
 const keyExtractor = ({phone}) => phone;
-
-const Contacts = ({navigation})=>{
+const Favorites = ({navigation}) => {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -26,51 +25,50 @@ const Contacts = ({navigation})=>{
         )
     }, []);
 
-    const contactsSorted = contacts.sort((a,b) => a.name.localeCompare(b.name));
-    const renderContact = ({item}) => {
-        const {name, avatar, phone} = item;
-        return <ContactListItem 
-            name={name}
+    const renderFavoriteThumbnail = ({item}) => {
+        const { avatar} = item;
+        return (
+            <ContactThumbnail
             avatar={avatar}
-            phone={phone}
             onPress={()=> navigation.navigate("Profile", {contact: item})}
-        />
+            />
+
+        );
     };
+
+    const favorites = contacts.filter(contact => contact.favorite);
 
     return (
         <View style={styles.container}>
-            {loading && <ActivityIndicator color="blue" size="large" />}
+            {loading && <ActivityIndicator size="large" />}
             {error && <Text>Error...</Text>}
             {!loading && !error && (
                 <FlatList 
-                    data={contactsSorted}
+                    data={favorites}
                     keyExtractor={keyExtractor}
-                    renderItem={renderContact} 
+                    numColumns={3}
+                    contentContainerStyle = {styles.list}
+                    renderItem={renderFavoriteThumbnail}
                 />
             )}
+
         </View>
+
     );
+
+
 }
+
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: 'white',
+        justifyContent: 'center',
+        flex: 1,
     },
-    header: {
-        width: '100%',
-        height: 50,
-        paddingLeft: 10,
-        backgroundColor: "#fff",
-        marginTop: 30,
-        alignItems: "left",
-        justifyContent: "center",
-      },
-    headerText: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: 'black',
-    },
+    list: {
+        alignItems: 'center',
+    }
 });
 
-export default Contacts;
+export default Favorites;

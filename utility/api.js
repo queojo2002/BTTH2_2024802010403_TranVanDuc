@@ -31,13 +31,14 @@ const fetchContacts = async () => {
 const fetchUserContacts = async () => {
     const response = await fetch('https://randomuser.me/api/?seed=fullstackio')
     const userData = await response.json();
-    return mapContact(userData.result[0]);
+    console.log(userData.results[0]);
+    return mapContact(userData.results[0]);
 }
 
 const fetchRandomContacts = async () => {
     const response = await fetch('https://randomuser.me/api/')
     const userData = await response.json();
-    return mapContact(userData.result[0]);
+    return mapContact(userData.results[0]);
 }
 
 export {fetchContacts, fetchUserContacts, fetchRandomContacts};

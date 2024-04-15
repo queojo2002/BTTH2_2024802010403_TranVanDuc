@@ -53,40 +53,39 @@ ContactThumbnail.propTypes = {
 };
 
 ContactThumbnail.defaultProps = {
-    name: 'test',
-    phone: '0326393540',
+    name: '',
+    phone: '',
     textColor: 'white',
     onPress: null,
 }
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#4496E7",
-      alignItems: 'center',
-      justifyContent: 'center', 
-      paddingHorizontal: 15,
-      paddingVertical: 100,
+        alignItems: 'center',
+        justifyContent: 'center', 
+        paddingHorizontal: 15,
+        paddingVertical: 30,
     },
     avatar: {
-      width: 90,
-      height: 90,
-      borderRadius: 45,
-      borderColor: 'white',
-      borderWidth: 2,
+        width: 90,
+        height: 90,
+        borderRadius: 45,
+        borderColor: 'white',
+        borderWidth: 2,
     },
     details: {
-      flex: 1,
+        flex: 1,
     },
     name: {
-      fontSize: 20,
-      marginTop: 24,
-      marginBottom: 2,
-      fontWeight: 'bold',
+        fontSize: 20,
+        marginTop: 24,
+        marginBottom: 2,
+        fontWeight: 'bold',
     },
     phone: {
-       marginLeft: 4,
-       fontSize: 16,
-       fontWeight: 'bold',
+        marginLeft: 4,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 
     phoneSection: {
